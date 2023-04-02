@@ -6,6 +6,7 @@ import az.example.mapstruct.dto.OperatorDto;
 import az.example.mapstruct.entity.CallRecordOperators;
 import az.example.mapstruct.entity.CallRecords;
 import az.example.mapstruct.entity.Operator;
+import org.mapstruct.CollectionMappingStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
@@ -13,7 +14,8 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE,
+        collectionMappingStrategy = CollectionMappingStrategy.ADDER_PREFERRED)
 public interface CallRecordsMapper {
     CallRecordsMapper INSTANCE = Mappers.getMapper(CallRecordsMapper.class);
 
