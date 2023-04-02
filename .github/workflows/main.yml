@@ -22,7 +22,7 @@ jobs:
         run: mvn clean install
 
       - name: Build the Docker image # push The image to the docker hub
-        run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_HUB_USERNAME }}/spring-boot-cicd:$(date-'%d-%m-%Y%H-%M-%S')}
+        run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_HUB_USERNAME }}/spring-boot-cicd:$(date-'%d%m%Y%H%M%S')}
 
 #      - name: Build Docker Image
 #        uses: docker/build-push-actions@v2
@@ -47,6 +47,6 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/spring-boot-cicd:$(date-'%d-%m-%Y%H-%M-%S')
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/spring-boot-cicd:$(date-'%d%m%Y%H%M%S')
 
 
