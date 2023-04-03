@@ -6,10 +6,7 @@ import az.example.mapstruct.dto.OperatorDto;
 import az.example.mapstruct.entity.CallRecordOperators;
 import az.example.mapstruct.entity.CallRecords;
 import az.example.mapstruct.entity.Operator;
-import org.mapstruct.CollectionMappingStrategy;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -22,7 +19,7 @@ public interface CallRecordsMapper {
     @Mapping(target = "operators", source = "callRecordOperators")
     CallRecordsDto callRecordsToCallRecordsDto(CallRecords callRecords);
 
-    @Mapping(target = "callRecordOperators", source = "operators")
+    @InheritInverseConfiguration
     CallRecords dtoToEntity(CallRecordsDto callRecordsDto);
 
     @Mapping(target = "operatorName", source = "name")
@@ -41,23 +38,9 @@ public interface CallRecordsMapper {
     @Mapping(target = "currentTime", source = "startTime")
     CallRecordOperatorsDto callRecordOperatorsToDto(CallRecordOperators callRecordOperators);
 
-    @Mapping(target = "startTime", source = "currentTime")
-    @Mapping(target = "operator", source = "operatorId")
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "callRecords", source = "callRecordsId")
+    @InheritInverseConfiguration
     CallRecordOperators dtoToEntityCalRecOps(CallRecordOperatorsDto callRecordOperatorsDto);
 
     List<CallRecordOperatorsDto> callRecOpsDtos(List<CallRecordOperators> operatorsList);
 
-    default CallRecords mapToCallRecords(Long id){
-        CallRecords callRecords = new CallRecords();
-        callRecords.setId(id);
-        return callRecords;
-    }
-
-    default Operator mapToOperator(Long value){
-        Operator operator = new Operator();
-        operator.setId(value);
-        return operator;
-    }
 }

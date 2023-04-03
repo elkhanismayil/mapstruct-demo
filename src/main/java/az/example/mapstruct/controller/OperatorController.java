@@ -18,11 +18,11 @@ public class OperatorController {
 
     @PostMapping
     public ResponseEntity<OperatorDto> addOperator(@RequestBody OperatorDto operatorDto) {
-        return new ResponseEntity<>(operatorService.createOperator(operatorDto), HttpStatus.CREATED);
+        return ResponseEntity.status(201).body(operatorService.createOperator(operatorDto));
     }
 
     @GetMapping
     public ResponseEntity<List<OperatorDto>> getAllOps(){
-        return new ResponseEntity<>(operatorService.getAll(), HttpStatus.OK);
+        return ResponseEntity.ok(operatorService.getAll());
     }
 }

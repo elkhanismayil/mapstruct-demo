@@ -17,11 +17,11 @@ public class CallRecordsController {
 
     @PostMapping
     public ResponseEntity<CallRecordsDto> addCallRecords(@RequestBody CallRecordsDto callRecordsDto) {
-        return new ResponseEntity<>(callRecordsService.createCallRecords(callRecordsDto), HttpStatus.CREATED);
+        return ResponseEntity.status(201).body(callRecordsService.createCallRecords(callRecordsDto));
     }
 
     @GetMapping
     public ResponseEntity<List<CallRecordsDto>> getAllRecs(){
-        return new ResponseEntity<>(callRecordsService.getAll(), HttpStatus.OK);
+        return ResponseEntity.ok(callRecordsService.getAll());
     }
 }
